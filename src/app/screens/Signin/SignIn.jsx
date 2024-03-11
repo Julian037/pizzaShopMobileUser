@@ -1,5 +1,5 @@
 import { View, Text,ScrollView,SafeAreaView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
   Button,
   ButtonText,
@@ -15,8 +15,10 @@ import {
 import styles from './SignInStyle';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import { AuthContext } from '../../../context';
 
 const SignIn = () => {
+  const {login} = useContext(AuthContext)
   const [showPassword, setShowPassword] = useState(false);
   const handleState = () => {
     setShowPassword((showState) => {
@@ -80,7 +82,7 @@ const SignIn = () => {
       </View>
       <View>
         <Button m="$3">
-          <ButtonText color="$white">Ingresar</ButtonText>
+          <ButtonText color="$white" onPress={login}>Ingresar</ButtonText>
         </Button>
       </View>
     </SafeAreaView>

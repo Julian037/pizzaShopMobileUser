@@ -1,18 +1,19 @@
-import { View, Text } from 'react-native'
 import React, {  FC, useContext } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from '../app/screens/Home';
-import Main from '../app/screens/Main';
+import NewOrder from '../app/screens/NewOrder/NewOrder';
 
 import { AuthContext } from '../context';
 import SignIn from '../app/screens/Signin/SignIn';
+import OrdersHistory from '../app/screens/OrdersHistory/OrdersHistory';
+import AuthNavigator from './AuthNavigator';
+import TabsNavigator from './TabsNavigator';
 
 
 export const AppNavigator = () => {
 
   const Stack = createNativeStackNavigator();
-  const {isLoggedIn, dispatch} = useContext(AuthContext);
+  const {isLoggedIn} = useContext(AuthContext);
 
   const renderViews = () => {
     if (false) {
@@ -29,15 +30,29 @@ export const AppNavigator = () => {
       return (
         <>
           <Stack.Screen
-            name="Main"
-            component={Main}
+            name="Auth"
+            component={AuthNavigator}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name="Home"
-            component={Home}
+            name="OrdersHistory"
+            component={OrdersHistory}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="NewOrder"
+            component={NewOrder}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="TabsNavigator"
+            component={TabsNavigator}
             options={{
               headerShown: false,
             }}
@@ -67,22 +82,7 @@ export const AppNavigator = () => {
           // },
         }}>
         {renderViews(isLoggedIn)}
-        {/* <Stack.Screen
-          name="Main"
-          component={Main}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
       </Stack.Navigator>
-
     </NavigationContainer>
   )
 }
