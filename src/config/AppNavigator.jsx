@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native'
 import React, {  FC, useContext } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -14,7 +13,7 @@ import TabsNavigator from './TabsNavigator';
 export const AppNavigator = () => {
 
   const Stack = createNativeStackNavigator();
-  const {isLoggedIn, dispatch} = useContext(AuthContext);
+  const {isLoggedIn} = useContext(AuthContext);
 
   const renderViews = () => {
     if (false) {

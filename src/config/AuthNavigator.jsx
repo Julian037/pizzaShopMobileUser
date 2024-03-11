@@ -1,7 +1,6 @@
 
-import React from 'react'
-import { Button, View, Text , ScrollView, SafeAreaView, TouchableOpacity, StyleSheet} from 'react-native';
-import { Drawer } from 'react-native-drawer-layout';
+import React, { useContext } from 'react'
+import { View, ScrollView, SafeAreaView, TouchableOpacity, StyleSheet} from 'react-native';
 import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
 import OrdersHistory from '../app/screens/OrdersHistory/OrdersHistory';
 import NewOrder from '../app/screens/NewOrder/NewOrder';
@@ -9,6 +8,7 @@ import { Heading } from "@gluestack-ui/themed"
 import Icon from 'react-native-vector-icons/Ionicons';
 import FoodMenu from '../app/screens/FoodMenu/FoodMenu';
 import TabsNavigator from './TabsNavigator';
+import { AuthContext } from '../context';
 
 const Auth = createDrawerNavigator();
 
@@ -25,18 +25,12 @@ const styles = StyleSheet.create({
 })
 
 const DrawerFooter = (props) => {
-  // const [state, dispatch] = useContext(Context)
-  // const isAdminUser = (state.clientModules?.adminUser && state.clientModules?.adminUser.length > 0) ?
-  //   state.clientModules?.adminUser.some((id) => id === state.user.id) : false
+  const {logout} = useContext(AuthContext)
   const { navigation } = props
-
-  const logOut = () => {
-    // dispatch({ type: 'REMOVE_USER' })
-  }
 
   const closeSession = () => {
     return (
-      <TouchableOpacity style={styles.container} onPress={logOut}>
+      <TouchableOpacity style={styles.container} onPress={logout}>
         <Icon name="exit-outline" size={20} style={styles.exitIcon} />
         <Heading style={{ color: 'white' }}>
           Cerrar sesión
@@ -69,7 +63,6 @@ const DrawerFooter = (props) => {
       </ScrollView>
       <DrawerItem
         label={() => closeSession()}
-        onPress={logOut}
         inactiveBackgroundColor="#267FC9"
       />
     </View>
@@ -80,7 +73,6 @@ const AuthNavigator = () => {
 
   return (
     <Auth.Navigator
-      // screenOptions={{headerTitle:'Emma Pizzería'}}
       screNavigatorenOptions={{ drawerPosition: 'left' }}
       initialRouteName="OrdersHistory"
       drawerContent={props => <DrawerFooter {...props} />}
