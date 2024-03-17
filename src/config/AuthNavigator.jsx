@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import FoodMenu from '../app/screens/FoodMenu/FoodMenu';
 import TabsNavigator from './TabsNavigator';
 import { AuthContext } from '../context';
+import Profile from '../app/screens/Profile/Profile';
 
 const Auth = createDrawerNavigator();
 
@@ -44,20 +45,20 @@ const DrawerFooter = (props) => {
       <ScrollView>
         <SafeAreaView>
           <DrawerItem
-            label={() => <Heading style={{ color: 'blue' }}>Nuevo pedido</Heading>}
+            label={() => <Heading style={{ color: 'white' }}>Nuevo pedido</Heading>}
             onPress={() => navigation.navigate('NewOrder')}
           />
           <DrawerItem
-            label={() => <Heading style={{ color: 'blue' }}>Historial de pedidos</Heading>}
+            label={() => <Heading style={{ color: 'white' }}>Historial de pedidos</Heading>}
             onPress={() => navigation.navigate('OrdersHistory')}
           />
           <DrawerItem
-            label={() => <Heading style={{ color: 'blue' }}>Sabores de casa</Heading>}
+            label={() => <Heading style={{ color: 'white' }}>Sabores de casa</Heading>}
             onPress={() => navigation.navigate('TabsNavigator')}
           />
           <DrawerItem
-            label={() => <Heading style={{ color: 'blue' }}>Mi cuenta</Heading>}
-            onPress={() => navigation.navigate('TabsNavigator')}
+            label={() => <Heading style={{ color: 'white' }}>Mi cuenta</Heading>}
+            onPress={() => navigation.navigate('Profile')}
           />
         </SafeAreaView>
       </ScrollView>
@@ -73,23 +74,29 @@ const AuthNavigator = () => {
 
   return (
     <Auth.Navigator
-      screNavigatorenOptions={{ drawerPosition: 'left' }}
       initialRouteName="OrdersHistory"
       drawerContent={props => <DrawerFooter {...props} />}
       screenOptions={{
         activeTintColor: 'white',
         inactiveTintColor: 'white',
-        headerTitle:'Emma Pizzería'
+        headerTitle:'Emma Pizzería',
+        headerTitleAlign: 'center',
+        headerTitleStyle: {
+          color: 'white'
+        },
+        headerStyle: {backgroundColor:'#2EA1E8'} ,
+        drawerStyle:{
+          backgroundColor: '#2EA1E8',
+        },
+        headerTintColor: 'white', 
       }}
-      drawerStyle={{
-        backgroundColor: '#2EA1E8',
-        width: '100%'
-      }}
+
     >
       <Auth.Screen name="OrdersHistory" component={OrdersHistory} />
       <Auth.Screen name="NewOrder" component={NewOrder} />
       <Auth.Screen name="FoodMenu" component={FoodMenu} />
       <Auth.Screen name="TabsNavigator" component={TabsNavigator} />
+      <Auth.Screen name="Profile" component={Profile} />
     </Auth.Navigator>
   )
 }
