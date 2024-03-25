@@ -1,11 +1,18 @@
-import { View, Text } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import React from 'react'
+import PizzaCard from '../../components/PizzaCard/PizzaCard';
+import { pizzas } from '../../../data/pizzas';
 
 const PizzaMenu = () => {
   return (
-    <View style={{ fontSize: 30, alignItems: 'center'}}>
-      <Text style={{fontSize: 30, }}>PizzaMenu Screen</Text>
-    </View>
+    <ScrollView>
+      {pizzas.map( pizza => (
+        <PizzaCard
+          key={pizza.id}
+          data={pizza}
+        />
+      ) )}
+    </ScrollView>
   )
 }
 

@@ -9,7 +9,7 @@ export interface AuthState {
 }
 
 const AUTH_INITIAL_STATE: AuthState = {
-  isLoggedIn: false,
+  isLoggedIn: true,
   user: undefined,
 }
 
